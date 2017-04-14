@@ -7,12 +7,41 @@
     tools:context="eu.hauru.klik.CounterActivity">
 
     <TextView
+        android:id="@+id/counterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginTop="30dp"
+        android:text="Ludzie w zupie"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"  />
+
+    <TextView
+        android:id="@+id/counterValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="00000"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/counterName" />
+
+    <Button
+        android:id="@+id/counterIncrement"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:background="@drawable/round_button"
+        android:onClick="incrementCounter"
+        android:text="+"
+        android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/counterValue"
+        app:layout_constraintVertical_bias="0.25" />
+
 
 </android.support.constraint.ConstraintLayout>
