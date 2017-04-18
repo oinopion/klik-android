@@ -1,11 +1,11 @@
 package eu.hauru.klik;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class CounterActivity extends AppCompatActivity {
+public class CounterActivity extends Activity {
     int counterValue = 0;
 
     @Override
