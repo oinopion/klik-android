@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ninja Clicker</string>
+    <string name="default_counter_name">Counter</string>
 </resources>

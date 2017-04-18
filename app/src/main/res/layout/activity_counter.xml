@@ -8,23 +8,23 @@
 
     <TextView
         android:id="@+id/counterName"
+        style="@android:style/TextAppearance.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Ludzie w zupie"
+        android:text="@string/default_counter_name"
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"  />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/counterValue"
+        style="@style/CounterValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="00000"
-        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/counterName" />

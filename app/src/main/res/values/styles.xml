@@ -2,11 +2,18 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Material">
-        <!-- Customize your theme here. -->
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:windowBackground">@color/colorSecondary</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CounterValue" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:background">@drawable/bg_counter_value</item>
+        <item name="android:minWidth">150dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
 </resources>
