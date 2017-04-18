@@ -1,6 +1,7 @@
 package eu.hauru.klik;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,8 +9,9 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class CounterActivity extends Activity {
-    private int counterValue = 0;
+    final static String STATE_PREFERENCES = "state";
 
+    private CounterState state;
     private TextView counterValueView;
 
     @Override
@@ -17,21 +19,23 @@ public class CounterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counter);
         counterValueView = (TextView) findViewById(R.id.counterValue);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        restoreState();
         renderCounterValue();
     }
 
     public void incrementCounter(View view) {
-        counterValue += 1;
+        state.incrementValue();
         renderCounterValue();
     }
 
+    private void restoreState() {
+        SharedPreferences statePreferences = getSharedPreferences(STATE_PREFERENCES, MODE_PRIVATE);
+        state = new CounterState(statePreferences);
+    }
+
     private void renderCounterValue() {
-        final String paddedValue = String.format(Locale.ENGLISH, "%05d", counterValue);
+        String paddedValue = String.format(Locale.ENGLISH, "%05d", state.getValue());
         counterValueView.setText(paddedValue);
     }
 }
