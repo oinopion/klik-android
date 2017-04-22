@@ -4,12 +4,15 @@ package eu.hauru.klik;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Objects;
+
 
 class CounterState {
     final static String STATE_PREFERENCES = "state";
     final static String COUNTER_VALUE_KEY = "counterValue";
     final static String COUNTER_NAME_KEY = "counterName";
 
+    private static CounterState instance;
 
     private int counterValue;
     private String counterName;
@@ -18,7 +21,15 @@ class CounterState {
     private final int initialCounterValue = 0;
     private final String defaultCounterName;
 
-    public CounterState(Context context) {
+    public static CounterState getInstance(Context context) {
+        if (instance == null) {
+            instance = new CounterState(context);
+        }
+
+        return instance;
+    }
+
+    private CounterState(Context context) {
         super();
         this.preferences = context.getSharedPreferences(STATE_PREFERENCES, Context.MODE_PRIVATE);
         this.defaultCounterName = context.getString(R.string.default_counter_name);
@@ -32,7 +43,15 @@ class CounterState {
     }
 
     public String getName() {
-        return counterName;
+        if (isNameSet()) {
+            return counterName;
+        }
+
+        return defaultCounterName;
+    }
+
+    public boolean isNameSet() {
+        return !(counterName == null || "".equals(counterName));
     }
 
     public void incrementValue() {
@@ -45,9 +64,11 @@ class CounterState {
         saveCounterValue();
     }
 
-    public void changeName(String name) {
-        this.counterName = name;
-        saveCounterName();
+    public void setName(String name) {
+        if (!Objects.equals(name, counterName)) {
+            counterName = name;
+            saveCounterName();
+        }
     }
 
     private int fetchCounterValue() {
@@ -55,7 +76,7 @@ class CounterState {
     }
 
     private String fetchCounterName() {
-        return preferences.getString(COUNTER_NAME_KEY, defaultCounterName);
+        return preferences.getString(COUNTER_NAME_KEY, "");
     }
 
     private void saveCounterValue() {

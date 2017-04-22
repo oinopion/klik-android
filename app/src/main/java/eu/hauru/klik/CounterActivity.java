@@ -26,7 +26,7 @@ public class CounterActivity extends AppCompatActivity {
         counterValueView = (TextView) findViewById(R.id.counterValue);
         counterNameView = (TextView) findViewById(R.id.counterName);
 
-        state = new CounterState(getApplicationContext());
+        state = CounterState.getInstance(getApplicationContext());
     }
 
     @Override
