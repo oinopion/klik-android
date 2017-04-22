@@ -24,6 +24,11 @@ class CounterState {
         saveCounterValue();
     }
 
+    public void resetValue() {
+        counterValue = 0;
+        saveCounterValue();
+    }
+
     private int fetchCounterValue() {
         return preferences.getInt(COUNTER_VALUE_KEY, 0);
     }

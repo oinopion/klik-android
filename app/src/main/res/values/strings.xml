@@ -6,6 +6,11 @@
     <string name="reset_counter">Reset counter</string>
     <string name="edit">Edit</string>
 
+    <string name="reset_dialog_title">Reset counter?</string>
+    <string name="reset_dialog_message">Resetting counter will set it\'s value back to zero.</string>
+    <string name="reset_dialog_ok_button">Reset</string>
+    <string name="reset_dialog_cancel_button">Cancel</string>
+
     <string name="title_activity_counter_edit">Edit</string>
     <string name="counter_name_hint">Counter name</string>
 </resources>

@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/action_reset"
-        android:onClick="resetCounter"
+        android:onClick="showResetDialog"
         android:title="@string/reset_counter"
         app:showAsAction="never" />
 
