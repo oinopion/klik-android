@@ -1,9 +1,7 @@
 package eu.hauru.klik;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +26,7 @@ public class CounterActivity extends AppCompatActivity {
         counterValueView = (TextView) findViewById(R.id.counterValue);
         counterNameView = (TextView) findViewById(R.id.counterName);
 
-        restoreState();
+        state = new CounterState(getApplicationContext());
     }
 
     @Override
@@ -47,6 +45,11 @@ public class CounterActivity extends AppCompatActivity {
 
     public void incrementCounter(View view) {
         state.incrementValue();
+        renderCounterValue();
+    }
+
+    public void resetCounter() {
+        state.resetValue();
         renderCounterValue();
     }
 
@@ -69,21 +72,12 @@ public class CounterActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        CounterActivity.this.resetCounter();
+                        resetCounter();
                     }
                 });
         builder.setNegativeButton(R.string.reset_dialog_cancel_button, null);
 
         return builder.create();
-    }
-
-    private void resetCounter() {
-        state.resetValue();
-        renderCounterValue();
-    }
-
-    private void restoreState() {
-        state = new CounterState(getApplicationContext());
     }
 
     private void renderCounterValue() {
