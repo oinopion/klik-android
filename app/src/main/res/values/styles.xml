@@ -1,10 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:windowBackground">@color/colorSecondary</item>
     </style>
 
     <style name="CounterValue" parent="@android:style/TextAppearance.Large">
@@ -13,7 +15,11 @@
         <item name="android:background">@drawable/bg_counter_value</item>
         <item name="android:minWidth">150dp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">56sp</item>
+    </style>
+
+    <style name="ActivityTheme">
+        <item name="android:layout_margin">@dimen/activity_layout_margin</item>
     </style>
 
 </resources>

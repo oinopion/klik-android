@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Ninja Clicker</string>
+
     <string name="default_counter_name">Counter</string>
+
+    <string name="reset_counter">Reset counter</string>
+    <string name="edit">Edit</string>
+
+    <string name="title_activity_counter_edit">Edit</string>
+    <string name="counter_name_hint">Counter name</string>
 </resources>
