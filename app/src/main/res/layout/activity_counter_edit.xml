@@ -7,7 +7,7 @@
     android:focusableInTouchMode="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="eu.hauru.klik.CounterEditActivity">
+    tools:context=".CounterEditActivity">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
