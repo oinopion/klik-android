@@ -6,7 +6,7 @@ import android.widget.EditText;
 
 public class CounterEditActivity extends AppCompatActivity {
 
-    private CounterState state;
+    private Repo repo;
 
     private EditText counterNameView;
 
@@ -16,26 +16,24 @@ public class CounterEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_counter_edit);
         counterNameView = (EditText) findViewById(R.id.counterNameEdit);
 
-        state = CounterState.getInstance(getApplicationContext());
+        repo = new Repo(getApplicationContext());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (state.isNameSet()) {
-            counterNameView.setText(state.getName());
-        }
+        counterNameView.setText(repo.getName());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        updateCounterName();
+        setCounterName();
     }
 
-    public void updateCounterName() {
+    public void setCounterName() {
         String editedName = counterNameView.getText().toString();
-        state.setName(editedName);
+        repo.setName(editedName);
     }
 
 }

@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class CounterActivity extends AppCompatActivity {
 
-    private CounterState state;
+    private Repo repo;
     private TextView counterNameView;
     private TextView counterValueView;
 
@@ -26,7 +26,7 @@ public class CounterActivity extends AppCompatActivity {
         counterValueView = (TextView) findViewById(R.id.counterValue);
         counterNameView = (TextView) findViewById(R.id.counterName);
 
-        state = CounterState.getInstance(getApplicationContext());
+        repo = new Repo(getApplicationContext());
     }
 
     @Override
@@ -44,12 +44,12 @@ public class CounterActivity extends AppCompatActivity {
     }
 
     public void incrementCounter(View view) {
-        state.incrementValue();
+        repo.incrementValue();
         renderCounterValue();
     }
 
     public void resetCounter() {
-        state.resetValue();
+        repo.resetValue();
         renderCounterValue();
     }
 
@@ -81,12 +81,17 @@ public class CounterActivity extends AppCompatActivity {
     }
 
     private void renderCounterValue() {
-        String paddedValue = String.format(Locale.ENGLISH, "%05d", state.getValue());
+        String paddedValue = String.format(Locale.ENGLISH, "%05d", repo.getValue());
         counterValueView.setText(paddedValue);
     }
 
     private void renderCounterName() {
-        counterNameView.setText(state.getName());
+        String name = repo.getName();
+        if (name != null) {
+            counterNameView.setText(name);
+        } else {
+            counterNameView.setText(R.string.default_counter_name);
+        }
     }
 
 }
