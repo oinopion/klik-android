@@ -4,13 +4,15 @@ import android.app.Application;
 import android.os.StrictMode;
 import android.util.Log;
 
+import io.realm.Realm;
+
 public class KlikApplication extends Application {
     public static final String TAG = "KlikApplication";
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        Realm.init(this);
         if (BuildConfig.DEBUG) {
             enableStrictMode();
         }
