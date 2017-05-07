@@ -20,14 +20,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".CounterEditActivity"
-            android:label="@string/title_activity_counter_edit"
-            android:parentActivityName=".CounterActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="eu.hauru.klik.CounterActivity" />
-        </activity>
     </application>
 
 </manifest>

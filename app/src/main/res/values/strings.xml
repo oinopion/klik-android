@@ -7,6 +7,13 @@
     <string name="edit_counter">Edit counter</string>
     <string name="reset_counter">Reset counter</string>
 
+
+    <string name="edit_dialog_title">Edit counter name</string>
+    <string name="edit_dialog_message">Try emojis 🎉</string>
+    <string name="edit_dialog_ok_button">Save</string>
+    <string name="edit_dialog_cancel_button">Cancel</string>
+
+
     <string name="reset_dialog_title">Reset counter?</string>
     <string name="reset_dialog_message">Resetting counter will set it\'s value back to zero.</string>
     <string name="reset_dialog_ok_button">Reset</string>
