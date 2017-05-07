@@ -2,6 +2,7 @@ package eu.hauru.klik;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class CounterFragment extends Fragment {
     }
 
     private void onIncrementButtonClicked(View view) {
+        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         repo.incrementCounter(counter);
         renderCounterValue();
     }

@@ -11,4 +11,5 @@
     <color name="colorForeground">@color/darkWhite</color>
     <color name="colorAccent">@color/yellow</color>
     <color name="colorBackground">@color/grey</color>
+    <color name="colorControlHighlight">@color/darkWhite</color>
 </resources>
