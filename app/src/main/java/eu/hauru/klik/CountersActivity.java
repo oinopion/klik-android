@@ -12,7 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class CountersActivity extends AppCompatActivity {
+    final static List<String> EMOJIS = Arrays.asList("🎉", "👻", "🍹", "👯", "🏀", "💰", "🚀");
 
     private CountersRepo repo;
     private ViewPager viewPager;
@@ -61,7 +66,8 @@ public class CountersActivity extends AppCompatActivity {
 
         builder.setView(view);
         builder.setTitle(R.string.edit_dialog_title);
-        builder.setMessage(R.string.edit_dialog_message);
+        String message = getString(R.string.edit_dialog_message, getRandomEmoji());
+        builder.setMessage(message);
         builder.setPositiveButton(R.string.edit_dialog_ok_button, (dialog, which) -> {
             String name = counterNameView.getText().toString();
             repo.setCounterName(counter, name);
@@ -85,6 +91,11 @@ public class CountersActivity extends AppCompatActivity {
 
     private Counter getCurrentCounter() {
         return repo.get(currentPage);
+    }
+
+    private String getRandomEmoji() {
+        Random random = new Random();
+        return EMOJIS.get(random.nextInt(EMOJIS.size()));
     }
 
     class PagerAdapter extends FragmentStatePagerAdapter {

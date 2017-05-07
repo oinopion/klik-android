@@ -9,7 +9,7 @@
 
 
     <string name="edit_dialog_title">Edit counter name</string>
-    <string name="edit_dialog_message">Try emojis 🎉</string>
+    <string name="edit_dialog_message">Try emojis for extra fun! %1$s</string>
     <string name="edit_dialog_ok_button">Save</string>
     <string name="edit_dialog_cancel_button">Cancel</string>
 
