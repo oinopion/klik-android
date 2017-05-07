@@ -1,0 +1,2 @@
+Howdy! Did you dream about being able to count more than one thing at the same time? Now you can!
+🆕 This release adds multi-counter support to this ridiculous app. Rejoice! 🎉

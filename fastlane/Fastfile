@@ -1,0 +1,10 @@
+fastlane_version "2.28.9"
+default_platform :android
+
+platform :android do
+  desc "Submit a new Beta Build to Play Store"
+  lane :beta do
+    gradle(task: "assembleRelease")
+    supply(track: 'beta')
+  end
+end
