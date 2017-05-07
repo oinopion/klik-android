@@ -3,14 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_add"
+        android:onClick="onMenuAddClicked"
+        android:title="@string/add_counter"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_edit"
-        android:onClick="switchToEditActivity"
-        android:title="@string/edit"
+        android:onClick="onMenuEditClicked"
+        android:title="@string/edit_counter"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_reset"
-        android:onClick="showResetDialog"
+        android:onClick="onMenuResetClicked"
         android:title="@string/reset_counter"
         app:showAsAction="never" />
 

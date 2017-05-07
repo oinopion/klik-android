@@ -1,13 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ActivityTheme"
+    android:paddingLeft="?dialogPreferredPadding"
+    android:paddingRight="?dialogPreferredPadding"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".CounterEditActivity">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -21,5 +18,4 @@
             android:inputType="text|textCapSentences" />
 
     </android.support.design.widget.TextInputLayout>
-
 </LinearLayout>

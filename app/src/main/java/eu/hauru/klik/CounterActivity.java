@@ -1,39 +1,33 @@
 package eu.hauru.klik;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
-import java.util.Locale;
+import android.widget.EditText;
 
 public class CounterActivity extends AppCompatActivity {
 
-    private CounterState state;
-    private TextView counterNameView;
-    private TextView counterValueView;
+    private CountersRepo repo;
+    private ViewPager viewPager;
+    private int currentPage = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counter);
-        counterValueView = (TextView) findViewById(R.id.counterValue);
-        counterNameView = (TextView) findViewById(R.id.counterName);
 
-        state = CounterState.getInstance(getApplicationContext());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        renderCounterName();
-        renderCounterValue();
+        repo = new CountersRepo();
+        viewPager = (ViewPager) findViewById(R.id.counterPager);
+        viewPager.setAdapter(new PagerAdapter());
+        viewPager.addOnPageChangeListener(new PageSelectedListener());
     }
 
     @Override
@@ -43,50 +37,79 @@ public class CounterActivity extends AppCompatActivity {
         return true;
     }
 
-    public void incrementCounter(View view) {
-        state.incrementValue();
-        renderCounterValue();
+    public void onMenuAddClicked(MenuItem item) {
+        Counter counter = repo.addCounter();
+        viewPager.setCurrentItem(repo.getPosition(counter));
     }
 
-    public void resetCounter() {
-        state.resetValue();
-        renderCounterValue();
-    }
-
-    public void showResetDialog(MenuItem item) {
-        AlertDialog dialog = prepareResetDialog();
+    public void onMenuEditClicked(MenuItem item) {
+        AlertDialog dialog = buildEditDialog(getCurrentCounter());
         dialog.show();
     }
 
-    public void switchToEditActivity(MenuItem item) {
-        Intent intent = new Intent(this, CounterEditActivity.class);
-        startActivity(intent);
+    public void onMenuResetClicked(MenuItem item) {
+        AlertDialog dialog = buildResetDialog(getCurrentCounter());
+        dialog.show();
     }
 
-    private AlertDialog prepareResetDialog() {
+    private AlertDialog buildEditDialog(final Counter counter) {
+        View view = getLayoutInflater().inflate(R.layout.dialog_counter_edit, null);
+        final EditText counterNameView = (EditText) view.findViewById(R.id.counterNameEdit);
+        counterNameView.setText(counter.getName());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setView(view);
+        builder.setTitle(R.string.edit_dialog_title);
+        builder.setMessage(R.string.edit_dialog_message);
+        builder.setPositiveButton(R.string.edit_dialog_ok_button, (dialog, which) -> {
+            String name = counterNameView.getText().toString();
+            repo.setCounterName(counter, name);
+        });
+        builder.setNegativeButton(R.string.edit_dialog_cancel_button, null);
+        return builder.create();
+    }
+
+    private AlertDialog buildResetDialog(final Counter counter) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(R.string.reset_dialog_title);
         builder.setMessage(R.string.reset_dialog_message);
-        builder.setPositiveButton(R.string.reset_dialog_ok_button,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        resetCounter();
-                    }
-                });
+        builder.setPositiveButton(R.string.reset_dialog_ok_button, (dialog, which) -> {
+            repo.resetCounter(counter);
+        });
         builder.setNegativeButton(R.string.reset_dialog_cancel_button, null);
 
         return builder.create();
     }
 
-    private void renderCounterValue() {
-        String paddedValue = String.format(Locale.ENGLISH, "%05d", state.getValue());
-        counterValueView.setText(paddedValue);
+    private Counter getCurrentCounter() {
+        return repo.get(currentPage);
     }
 
-    private void renderCounterName() {
-        counterNameView.setText(state.getName());
+    class PagerAdapter extends FragmentStatePagerAdapter {
+
+        PagerAdapter() {
+            super(getSupportFragmentManager());
+            repo.addCountersChangeListener(this::notifyDataSetChanged);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Counter counter = repo.get(position);
+            return CounterFragment.newInstance(counter.getId());
+        }
+
+        @Override
+        public int getCount() {
+            return repo.getSize();
+        }
     }
 
+    class PageSelectedListener extends ViewPager.SimpleOnPageChangeListener {
+        @Override
+        public void onPageSelected(int position) {
+            currentPage = position;
+        }
+    }
 }
