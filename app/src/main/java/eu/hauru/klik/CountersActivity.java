@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-public class CounterActivity extends AppCompatActivity {
+public class CountersActivity extends AppCompatActivity {
 
     private CountersRepo repo;
     private ViewPager viewPager;
