@@ -59,6 +59,12 @@ public class CountersRepo {
         realm.commitTransaction();
     }
 
+    public void resetCounter(Counter counter) {
+        realm.beginTransaction();
+        counter.resetValue();
+        realm.commitTransaction();
+    }
+
     public void addCountersChangeListener(OnCountersChangeListener listener) {
         counters.addChangeListener((collection, changeSet) -> listener.onCountersChange());
     }

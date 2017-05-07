@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import io.realm.RealmChangeListener;
-import io.realm.RealmModel;
-
 
 public class CounterFragment extends Fragment {
     private static final String COUNTER_ID = "counterId";
@@ -47,6 +44,7 @@ public class CounterFragment extends Fragment {
 
         counterValueView = (TextView) rootView.findViewById(R.id.counterValue);
         counterNameView = (TextView) rootView.findViewById(R.id.counterName);
+        counter.addChangeListener((object, changeSet) -> render());
 
         Button counterIncrementButton = (Button) rootView.findViewById(R.id.counterIncrement);
         counterIncrementButton.setOnClickListener(this::onIncrementButtonClicked);
@@ -58,6 +56,12 @@ public class CounterFragment extends Fragment {
     public void onResume() {
         super.onResume();
         render();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        counter.removeAllChangeListeners();
     }
 
     private void onIncrementButtonClicked(View view) {

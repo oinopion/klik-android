@@ -4,7 +4,6 @@ package eu.hauru.klik;
 import android.text.TextUtils;
 
 import java.util.Date;
-import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -36,6 +35,10 @@ public class Counter extends RealmObject {
 
     void incrementValue() {
         value += 1;
+    }
+
+    void resetValue() {
+        value = 0;
     }
 
     void setName(String name) {

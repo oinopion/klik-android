@@ -3,7 +3,6 @@ package eu.hauru.klik;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +16,8 @@ public class CounterActivity extends AppCompatActivity {
     private CountersRepo repo;
     private PagerAdapter pagerAdapter;
     private ViewPager viewPager;
+    private int currentPage = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,12 @@ public class CounterActivity extends AppCompatActivity {
         pagerAdapter = new PagerAdapter();
         viewPager = (ViewPager) findViewById(R.id.counterPager);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                currentPage = position;
+            }
+        });
     }
 
     @Override
@@ -57,6 +64,8 @@ public class CounterActivity extends AppCompatActivity {
         builder.setTitle(R.string.reset_dialog_title);
         builder.setMessage(R.string.reset_dialog_message);
         builder.setPositiveButton(R.string.reset_dialog_ok_button, (dialog, which) -> {
+            Counter counter = repo.get(currentPage);
+            repo.resetCounter(counter);
         });
         builder.setNegativeButton(R.string.reset_dialog_cancel_button, null);
 
